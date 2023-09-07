@@ -11,7 +11,7 @@
                     <li><router-link :to="{name:'Home'}" class="active">Home</router-link></li>
                     <li><router-link :to="{name:'Blog'}" class="">Blog</router-link></li>
                     <li><router-link :to="{name:'About'}" class="">About</router-link></li>
-                    <li><router-link :to="{name:'About'}" class="">About</router-link></li>
+                    <li><router-link :to="{name:'contact'}" class="">Contact</router-link></li>
                 </ul>
             </div>
 
