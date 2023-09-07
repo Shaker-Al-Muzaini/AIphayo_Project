@@ -8,10 +8,10 @@
 
             <div class="side-links">
                 <ul>
-                    <li><a class="active" href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><router-link :to="{name:'Home'}" class="active">Home</router-link></li>
+                    <li><router-link :to="{name:'Blog'}" class="">Blog</router-link></li>
+                    <li><router-link :to="{name:'About'}" class="">About</router-link></li>
+                    <li><router-link :to="{name:'About'}" class="">About</router-link></li>
                 </ul>
             </div>
 
