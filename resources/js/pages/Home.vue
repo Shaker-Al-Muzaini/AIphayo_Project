@@ -16,9 +16,7 @@
                 <span style="float: right">Written By Alphayo Wakarindi</span>
             </p>
             <h4 style="font-weight: bolder">
-                <a href="single-blog.html"
-                >Benefits of Getting Covid 19 Vaccination</a
-                >
+                <router-link :to="{name:'singleBlog',params:{slug:'Benefits-of-Getting-Covid-19'}}">Benefits of Getting Covid 19 Vaccination</router-link>
             </h4>
         </div>
 
