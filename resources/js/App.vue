@@ -12,9 +12,9 @@
                     <li><router-link @click="hideOverlay" :to="{name:'Blog'}">Blog</router-link></li>
                     <li><router-link @click="hideOverlay" :to="{name:'About'}">About</router-link></li>
                     <li><router-link @click="hideOverlay" :to="{name:'contact'}">Contact</router-link></li>
-                    <li><router-link @click="hideOverlay" :to="{name:'Register'}">Register</router-link></li>
-                    <li><router-link @click="hideOverlay" :to="{name:'Login'}">Login</router-link></li>
-                    <li><router-link @click="hideOverlay" :to="{name:'Dashboard'}">Dashboard</router-link></li>
+                    <li v-if="! loggedIn" ><router-link @click="hideOverlay" :to="{name:'Register'}">Register</router-link></li>
+                    <li v-if="! loggedIn"><router-link @click="hideOverlay" :to="{name:'Login'}">Login</router-link></li>
+                    <li v-if="loggedIn"><router-link @click="hideOverlay" :to="{name:'Dashboard'}">Dashboard</router-link></li>
                 </ul>
             </div>
 
@@ -37,7 +37,7 @@
         </div>
         <!-- main -->
             <div class="container">
-                <router-view></router-view>
+                <router-view @update-sidebar="updateSidebar"></router-view>
             </div>
         <!-- Main footer -->
         <footer class="main-footer">
@@ -55,6 +55,7 @@ export default {
 data() {
     return {
         overlayVisiblility:false,
+        loggedIn:false,
     }
 },
     methods:{
@@ -64,7 +65,14 @@ data() {
         hideOverlay(){
             this.overlayVisiblility=false;
         },
+        updateSidebar(){
+            this.loggedIn=!this.loggedIn;
+        }
+    },
+    mounted() {
+        this.loggedIn = !!localStorage.getItem('authenticated');
     }
+
 }
 </script>
 <style scoped>
