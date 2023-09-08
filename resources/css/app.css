@@ -191,7 +191,6 @@ footer small {
     cursor: pointer;
 }
 
-
 /* Categories */
 
 .categories ul li {
@@ -367,7 +366,6 @@ footer small {
     font-weight: 300;
 }
 
-
 #contact-us .specific-info {
     display: flex;
     margin-bottom: 50px;
@@ -414,7 +412,7 @@ textarea {
 
 .contact-form span {
     font-weight: 300;
-    font-size: 16;
+    font-size: 16px;
 }
 
 textarea {
@@ -508,15 +506,45 @@ textarea {
         margin-bottom: 25px;
     }
 }
-.router-link-active{
+
+.side-links .router-link-active {
     background-color: orangered;
     color: #fff;
-    padding: 3px 1px;
+    padding: 3px 15px;
     border-radius: 3px;
 }
-.error{
+
+.error {
     color: red;
     display: block;
     margin-top: 10px;
-    margin-bottom: 15px ;
+    margin-bottom: 15px;
+}
+
+.success-msg {
+    padding: 10px 12px;
+    border-radius: 3px;
+    color: #270;
+    background-color: #dff2bf;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+}
+
+.edit-link {
+    padding: 6px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.delete-btn {
+    padding: 6px 13px;
+    background-color: red;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    font-size: 14px;
 }
