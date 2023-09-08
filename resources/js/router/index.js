@@ -7,6 +7,9 @@ import Register from "../pages/Register.vue";
 import SingleBlog from "../pages/SingleBlog.vue";
 import Contact from "../pages/Contact.vue";
 import Dashboard from "../pages/Dashboard.vue";
+import CreateCategories from "../pages/categories/CreateCategories.vue";
+import CategoriesList from "../pages/categories/CategoriesList.vue";
+import EditCategories from "../pages/categories/EditCategories.vue";
 
 
 
@@ -24,17 +27,20 @@ const routes =[
     {
         path: "/dashboard",
         name: "Dashboard",
-        component: Dashboard
+        component: Dashboard,
+        meta:{requiresAuth:true}
     },
     {
         path: "/register",
         name: "Register",
-        component: Register
+        component: Register,
+        meta:{requiresGuest:true}
     },
     {
         path: "/login",
         name: "Login",
-        component: Login
+        component: Login,
+        meta:{requiresGuest:true}
     },
     {
         path: "/blog",
@@ -51,11 +57,45 @@ const routes =[
         name: "singleBlog",
         component: SingleBlog,
         props:true
-    }
+    },
+    {
+        path: "/create/categories",
+        name: "CreateCategories",
+        component: CreateCategories,
+        meta:{requiresAuth:true}
+    },
+    {
+        path: "/categories",
+        name: "CategoriesList",
+        component: CategoriesList,
+        meta: { requiresAuth: true },
+    },
+
+    {
+        path: "/categories/:id/edit",
+        name: "EditCategories",
+        component: EditCategories,
+        meta: { requiresAuth: true },
+        props: true
+    },
 
 ];
 const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
+router.beforeEach((to,from)=>{
+    const authenticated=localStorage.getItem("authenticated");
+    if(to.meta.requiresGuest && authenticated){
+        return{
+            name:"Dashboard",
+        };
+
+    }else if(to.meta.requiresAuth && !authenticated){
+        return {
+            name:"Login",
+        }
+    }
+})
 export default router;

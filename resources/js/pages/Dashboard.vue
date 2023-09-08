@@ -2,14 +2,27 @@
     <div id="backend-view">
         <div class="logout"><a href="#" @click="logout">Log out</a></div>
         <h1 class="heading">Dashboard</h1>
-        <span>Hi {{ name }} ?</span>
+        <span>Hi {{ name }}!</span>
         <div class="links">
             <ul>
-                <li><a href="">Create Post</a></li>
-
-                <li><a href="">Create Category</a></li>
-
-                <li><a href="">Categories List</a></li>
+                <li>
+                    <a>Create Posts</a>
+                </li>
+<!--                <li>-->
+<!--                    <router-link :to="{ name: 'DashboardPostsList' }"-->
+<!--                    >Posts List</router-link-->
+<!--                    >-->
+<!--                </li>-->
+                <li>
+                    <router-link :to="{ name: 'CreateCategories' }"
+                    >Create Categories</router-link
+                    >
+                </li>
+                <li>
+                    <router-link :to="{ name: 'CategoriesList' }"
+                    >Categories List</router-link
+                    >
+                </li>
             </ul>
         </div>
     </div>
@@ -17,26 +30,36 @@
 
 <script>
 export default {
-    data(){
-        return{
-            name:''
-        }
+    data() {
+        return {
+            name: "",
+        };
     },
     mounted() {
         axios
-            .get('/api/user')
-            .then((response)=>this.name=(response.data.name))
-                .catch(error=>console.log(error))
+            .get("/api/user")
+            .then((response) => (this.name = response.data.name))
+            .catch((error) => {
+                if (error.response.status === 401) {
+                    this.$emit("updateSidebar");
+                    localStorage.removeItem("authenticated");
+                    this.$router.push({ name: "Login" });
+                }
+            });
     },
-    methods:{
-        logout(){
-            axios
-                .post('/api/logout')
-                .then((response)=>(this.$router.push({name:'Home'})))
-                .catch(error=>console.log(error))
-        }
-    }
 
+    methods: {
+        logout() {
+            axios
+                .post("/api/logout")
+                .then((response) => {
+                    this.$router.push({ name: "Home" });
+                    localStorage.removeItem("authenticated");
+                    this.$emit("updateSidebar");
+                })
+                .catch((error) => console.log(error));
+        },
+    },
 };
 </script>
 
