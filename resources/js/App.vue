@@ -2,16 +2,19 @@
     <div id="wrapper">
 
         <!-- sidebar -->
-        <div class="sidebar">
-            <span class="closeButton">&times;</span>
+        <div class="sidebar" :class="{showOverlay:overlayVisiblility}">
+            <span class="closeButton" @click="hideOverlay">&times;</span>
             <p class="brand-title"><a href="">Alphayo Blog</a></p>
 
             <div class="side-links">
                 <ul>
-                    <li><router-link :to="{name:'Home'}" class="active">Home</router-link></li>
-                    <li><router-link :to="{name:'Blog'}" class="">Blog</router-link></li>
-                    <li><router-link :to="{name:'About'}" class="">About</router-link></li>
-                    <li><router-link :to="{name:'contact'}" class="">Contact</router-link></li>
+                    <li><router-link @click="hideOverlay"  :to="{name:'Home'}">Home</router-link></li>
+                    <li><router-link @click="hideOverlay" :to="{name:'Blog'}">Blog</router-link></li>
+                    <li><router-link @click="hideOverlay" :to="{name:'About'}">About</router-link></li>
+                    <li><router-link @click="hideOverlay" :to="{name:'contact'}">Contact</router-link></li>
+                    <li><router-link @click="hideOverlay" :to="{name:'Register'}">Register</router-link></li>
+                    <li><router-link @click="hideOverlay" :to="{name:'Login'}">Login</router-link></li>
+                    <li><router-link @click="hideOverlay" :to="{name:'Dashboard'}">Dashboard</router-link></li>
                 </ul>
             </div>
 
@@ -27,7 +30,7 @@
             </footer>
         </div>
         <!-- Menu Button -->
-        <div class="menuButton">
+        <div class="menuButton" @click="ShowOverlay">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
@@ -47,3 +50,26 @@
         </footer>
     </div>
 </template>
+<script>
+export default {
+data() {
+    return {
+        overlayVisiblility:false,
+    }
+},
+    methods:{
+        ShowOverlay(){
+            this.overlayVisiblility=true;
+        },
+        hideOverlay(){
+            this.overlayVisiblility=false;
+        },
+    }
+}
+</script>
+<style scoped>
+.showOverlay{
+    width: 100%;
+    z-index: 5;
+}
+</style>
