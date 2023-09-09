@@ -1,11 +1,12 @@
-import {createRouter,createWebHistory} from "vue-router";
-import About from "../pages/About.vue";
+import { createRouter, createWebHistory } from "vue-router";
+
+import About from '../pages/About.vue'
 import Home from "../pages/Home.vue";
 import Blog from "../pages/Blog.vue";
+import Contact from "../pages/Contact.vue";
+import SingleBlog from "../pages/SingleBlog.vue";
 import Login from "../pages/Login.vue";
 import Register from "../pages/Register.vue";
-import SingleBlog from "../pages/SingleBlog.vue";
-import Contact from "../pages/Contact.vue";
 import Dashboard from "../pages/Dashboard.vue";
 import CreateCategories from "../pages/categories/CreateCategories.vue";
 import CategoriesList from "../pages/categories/CategoriesList.vue";
@@ -14,59 +15,58 @@ import CreatePosts from "../pages/posts/CreatePosts.vue";
 import DashboardPostsList from "../pages/posts/DashboardPostsList.vue";
 import EditPosts from "../pages/posts/EditPosts.vue";
 
-
-
-const routes =[
+const routes = [
     {
         path: "/",
         name: "Home",
-        component: Home
+        component: Home,
     },
     {
         path: "/about",
         name: "About",
-        component: About
+        component: About,
     },
     {
-        path: "/dashboard",
-        name: "Dashboard",
-        component: Dashboard,
-        meta:{requiresAuth:true}
+        path: "/blog",
+        name: "Blog",
+        component: Blog,
     },
     {
-        path: "/register",
-        name: "Register",
-        component: Register,
-        meta:{requiresGuest:true}
+        path: "/contact",
+        name: "Contact",
+        component: Contact,
+    },
+    {
+        path: "/blog/:slug",
+        name: "SingleBlog",
+        component: SingleBlog,
+        props: true,
     },
     {
         path: "/login",
         name: "Login",
         component: Login,
-        meta:{requiresGuest:true}
+        meta: { requiresGuest: true }
     },
     {
-        path: "/blog",
-        name: "Blog",
-        component: Blog
+        path: "/register",
+        name: "Register",
+        component: Register,
+        meta: { requiresGuest: true }
     },
     {
-        path: "/contact",
-        name: "contact",
-        component: Contact
+        path: "/dashboard",
+        name: "Dashboard",
+        component: Dashboard,
+        meta: { requiresAuth: true }
     },
     {
-        path: "/blog/:slug",
-        name: "singleBlog",
-        component: SingleBlog,
-        props:true
-    },
-    {
-        path: "/create/categories",
+        path: "/categories/create",
         name: "CreateCategories",
         component: CreateCategories,
-        meta:{requiresAuth:true}
+        meta: { requiresAuth: true },
     },
+
     {
         path: "/categories",
         name: "CategoriesList",
@@ -81,6 +81,7 @@ const routes =[
         meta: { requiresAuth: true },
         props: true
     },
+
     {
         path: "/posts/create",
         name: "CreatePosts",
@@ -101,25 +102,26 @@ const routes =[
         component: EditPosts,
         meta: { requiresAuth: true },
         props: true
-    }
-
+    },
 ];
+
 const router = createRouter({
     history: createWebHistory(),
     routes,
 });
 
-router.beforeEach((to,from)=>{
-    const authenticated=localStorage.getItem("authenticated");
-    if(to.meta.requiresGuest && authenticated){
-        return{
-            name:"Dashboard",
-        };
+router.beforeEach((to, from) => {
+    const authenticated = localStorage.getItem("authenticated");
 
-    }else if(to.meta.requiresAuth && !authenticated){
+    if (to.meta.requiresGuest && authenticated) {
         return {
-            name:"Login",
-        }
+            name: "Dashboard",
+        };
+    } else if (to.meta.requiresAuth && !authenticated) {
+        return {
+            name: "Login",
+        };
     }
-})
+});
+
 export default router;
