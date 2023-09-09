@@ -6,13 +6,13 @@
         <div class="links">
             <ul>
                 <li>
-                    <a>Create Posts</a>
+                    <router-link :to="{ name: 'CreatePosts' }">Create Posts</router-link>
                 </li>
-<!--                <li>-->
-<!--                    <router-link :to="{ name: 'DashboardPostsList' }"-->
-<!--                    >Posts List</router-link-->
-<!--                    >-->
-<!--                </li>-->
+                <li>
+                    <router-link :to="{ name: 'DashboardPostsList' }"
+                    >Posts List</router-link
+                    >
+                </li>
                 <li>
                     <router-link :to="{ name: 'CreateCategories' }"
                     >Create Categories</router-link

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -27,10 +29,25 @@ Route::post('register',[RegisteredUserController::class,'store']);
 Route::post('login',[AuthenticatedSessionController::class,'store']);
 
 //categories
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/categories/create',[CategoryController::class,'store']);
-    Route::get('/categories/{category}', [CategoryController::class, 'show']);
-    Route::get('categories', [CategoryController::class, 'index']);
-    Route::put('/categories/{category}', [CategoryController::class, 'update']);
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+Route::middleware('auth:sanctum')->prefix('categories')->group(function () {
+    Route::post('/create',[CategoryController::class,'store']);
+    Route::get('/{category}', [CategoryController::class, 'show']);
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::put('/{category}', [CategoryController::class, 'update']);
+    Route::delete('/{category}', [CategoryController::class, 'destroy']);
 });
+
+//posts
+Route::middleware('auth:sanctum')->prefix('posts')->group(function () {
+
+Route::middleware('auth:sanctum')->post('/', [PostController::class, 'store']);
+Route::middleware('auth:sanctum')->put('/{post:slug}', [PostController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/{post:slug}', [PostController::class, 'destroy']);
+
+});
+
+//Route::get('home-posts', [HomeController::class, 'index']);
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
+Route::get('posts', [PostController::class, 'index']);
+//Route::get('related-posts/{post:slug}', [RelatedPostController::class, 'index']);
+Route::get('dashboard-posts', [DashboardPostController::class, 'index']);
