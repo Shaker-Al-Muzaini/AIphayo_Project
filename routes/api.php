@@ -47,7 +47,7 @@ Route::middleware('auth:sanctum')->put('/{post:slug}', [PostController::class, '
 Route::middleware('auth:sanctum')->delete('/{post:slug}', [PostController::class, 'destroy']);
 
 });
-
+//Dashboards
 Route::get('home-posts', [HomeController::class, 'index']);
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::get('posts', [PostController::class, 'index']);
